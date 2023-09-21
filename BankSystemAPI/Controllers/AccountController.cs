@@ -1,5 +1,7 @@
 ﻿using BankSystem.Application.Commands.CreateAccount;
 using BankSystem.Application.Commands.DepositMoney;
+using BankSystem.Application.Commands.TransferMoney;
+using BankSystem.Application.Models;
 using BankSystemAPI.Functions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -16,6 +18,9 @@ namespace BankSystemAPI.Controllers
         }
 
         [HttpPost("create")]
+        [ProducesResponseType(typeof(Result<CreateAccountViewModel>), 200)]
+        [ProducesResponseType(typeof(Result<>), 500)]
+        [ProducesResponseType(typeof(Result<>), 404)]
         public async Task<JsonResult> Create([FromBody] CreateAccountCommand command) => await HandleControllerActions.Execute(this, command);
     }
 }
